@@ -13,6 +13,8 @@ namespace MiniStore.Helper
         public ApplicationMapper()
         {
             CreateMap<Category, CategoryDto>().ReverseMap();
+
+            CreateMap<CategoryDto, Category>().ReverseMap();
         }
     }
 }

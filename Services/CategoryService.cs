@@ -27,9 +27,9 @@ namespace MiniStore.Services
 
 
 
-        public Task<bool> DeleteCategory(int categoryId)
+        public async Task<bool> DeleteCategory(int categoryId)
         {
-            throw new NotImplementedException();
+           return await _categoryRepository.DeleteCategory(categoryId);
         }
 
 
@@ -50,9 +50,9 @@ namespace MiniStore.Services
 
 
 
-        public Task<Category> UpdateCategory(int categoryId, Category category)
+        public async Task<Category> UpdateCategory(int categoryId, Category category)
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.UpdateCategory(categoryId, category);
         }
     }
 }

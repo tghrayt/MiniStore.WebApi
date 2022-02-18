@@ -58,7 +58,7 @@ namespace MiniStore.Controllers
         /// Retourne une catégorie selon l'id donné
         /// </summary>
         /// <returns>La catégorie demandée</returns>
-        /// <exception>Déclanche une exception d'application si la liste est vide</exception>
+        /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         // GET: api/Category/categories/{5}
         [HttpGet("categories/{id}")]
         public async Task<ActionResult<CategoryDto>> GetCatgoryByID(int id)
@@ -86,7 +86,7 @@ namespace MiniStore.Controllers
         /// Ajouter une catégorie
         /// </summary>
         /// <returns>La catégorie ajoutée</returns>
-        /// <exception>Déclanche une exception d'application si la liste est vide</exception>
+        /// <exception>Déclanche une exception d'application si la catégorie est nulle ou l'un de ces champs null</exception>
         // POST: api/Category/add
         [HttpPost("add")]
         public async Task<ActionResult<CategoryDto>> AddCategory([FromBody] CategoryDto categoryDto)
@@ -111,6 +111,61 @@ namespace MiniStore.Controllers
         }
 
 
+
+        /// <summary>
+        /// Retourne le status de l'action de catégorie à supprimer
+        /// </summary>
+        /// <returns>boolean</returns>
+        /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
+        // GET: api/Category/categories/{5}
+        [HttpDelete("categories/{id}")]
+        public async Task<ActionResult<CategoryDto>> DeleteCategory(int id)
+        {
+            try
+            {
+                _logger.LogInformation("Categories/id api Invoked (pour supprimer la catégorie souhaitée) ...");
+                var categorieStatus = await _categoryService.DeleteCategory(id);
+                if(categorieStatus == false)
+                {
+                    return BadRequest("Cette categorie n'existe plus !!");
+                }
+                    return StatusCode(202, categorieStatus);
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                return BadRequest(e);
+            }
+
+        }
+
+
+
+        /// <summary>
+        /// Retourne la catégorie synchronisée
+        /// </summary>
+        /// <returns>Category</returns>
+        /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
+        // GET: api/Category/categories/{5}
+        [HttpPut("categories/{id}")]
+        public async Task<ActionResult<CategoryDto>> UpdateCategory(int id , [FromBody] CategoryDto categoryDto)
+        {
+            try
+            {
+                _logger.LogInformation("Categories/id api Invoked (pour modifier  la catégorie souhaitée) ...");
+                var category = _mapper.Map<Category>(categoryDto);
+                var categoryUpdated = await _categoryService.UpdateCategory(id,category);
+                return StatusCode(204, categoryUpdated);
+
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                return BadRequest(e);
+            }
+
+        }
 
     }
 }

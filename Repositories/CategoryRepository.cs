@@ -1,4 +1,5 @@
-﻿using MiniStore.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using MiniStore.Context;
 using MiniStore.Models;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,23 @@ namespace MiniStore.Repositories
 
 
 
-        public  Task<bool> DeleteCategory(int categoryId)
+        public async Task<bool> DeleteCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            var category = await _storeContext.Categories.FindAsync(categoryId);
+
+            if (category == null)
+            {
+                throw new ArgumentException("Cette categorie n'exsite plus !");
+            }
+
+            var categeryDeleted = _storeContext.Categories.Remove(category);
+            await _storeContext.SaveChangesAsync();
+
+            if (categeryDeleted == null)
+            {
+                return false;
+            }
+            return true;
         }
 
 
@@ -52,9 +67,18 @@ namespace MiniStore.Repositories
 
 
 
-        public Task<Category> UpdateCategory(int categoryId, Category category)
+        public async Task<Category> UpdateCategory(int categoryId, Category category)
         {
-            throw new NotImplementedException();
+            var categoryToUpdate = await _storeContext.Categories.FirstAsync(a => a.CategoryId== categoryId);
+            if (categoryToUpdate == null)
+            {
+                throw new ArgumentException("Cette categorie n'exsite pas !");
+            }
+
+            categoryToUpdate.CategoryName = category.CategoryName;
+            await _storeContext.SaveChangesAsync();
+
+            return categoryToUpdate;
         }
 
 
