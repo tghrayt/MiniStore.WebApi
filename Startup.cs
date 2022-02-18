@@ -11,7 +11,9 @@ using MiniStore.Repositories;
 using MiniStore.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace MiniStore
@@ -34,6 +36,18 @@ namespace MiniStore
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+            services.AddSwaggerGen(s =>
+            {
+                s.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
+                {
+                    Version ="V1",
+                    Title ="MiniStore API",
+                    Description ="Api for managing a mini store"
+                });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                s.IncludeXmlComments(xmlPath);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +69,12 @@ namespace MiniStore
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("swagger/V1/swagger.json", "Ministore Api V1");
+                c.RoutePrefix = string.Empty;
             });
         }
     }

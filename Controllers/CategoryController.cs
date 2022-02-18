@@ -14,6 +14,7 @@ namespace MiniStore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Consumes("application/json")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;

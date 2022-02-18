@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MiniStore</name>
+    </assembly>
+    <members>
+        <member name="M:MiniStore.Controllers.CategoryController.GetAllCategories">
+            <summary>
+            Retourne toute la liste des categories
+            </summary>
+            <returns>La liste des categories</returns>
+            <exception>Déclanche une exception d'application si la liste est vide</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.CategoryController.GetCatgoryByID(System.Int32)">
+            <summary>
+            Retourne une catégorie selon l'id donné
+            </summary>
+            <returns>La catégorie demandée</returns>
+            <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.CategoryController.AddCategory(MiniStore.Dto.CategoryDto)">
+            <summary>
+            Ajouter une catégorie
+            </summary>
+            <returns>La catégorie ajoutée</returns>
+            <exception>Déclanche une exception d'application si la catégorie est nulle ou l'un de ces champs null</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.CategoryController.DeleteCategory(System.Int32)">
+            <summary>
+            Retourne le status de l'action de catégorie à supprimer
+            </summary>
+            <returns>boolean</returns>
+            <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.CategoryController.UpdateCategory(System.Int32,MiniStore.Dto.CategoryDto)">
+            <summary>
+            Retourne la catégorie synchronisée
+            </summary>
+            <returns>Category</returns>
+            <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
+        </member>
+    </members>
+</doc>
