@@ -14,7 +14,7 @@ namespace MiniStore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Consumes("application/json")]
+    [Produces("application/json")]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -34,8 +34,14 @@ namespace MiniStore.Controllers
         /// Retourne toute la liste des categories
         /// </summary>
         /// <returns>La liste des categories</returns>
+        /// <response code="200">Liste des catégories</response>
+        /// <response code="404">la liste introuvable</response>
+        /// <response code="500">Oops! le service est indisponible pour le moment</response>
         /// <exception>Déclanche une exception d'application si la liste est vide</exception>
         // GET: api/Category/categories
+        [ProducesResponseType(typeof(IEnumerable<Category>), 200)]
+        [ProducesResponseType(typeof(NotFoundResult), 404)]
+        [ProducesResponseType(typeof(void), 500)]
         [HttpGet("categories")]
         public ActionResult<IEnumerable<Category>> GetAllCategories()
         {
@@ -48,7 +54,7 @@ namespace MiniStore.Controllers
             catch (Exception e)
             {
                 _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
-                return BadRequest(e);
+                return new NotFoundResult();
             }
 
         }
@@ -59,8 +65,14 @@ namespace MiniStore.Controllers
         /// Retourne une catégorie selon l'id donné
         /// </summary>
         /// <returns>La catégorie demandée</returns>
+        /// <response code="200">Catégorie sélectionné</response>
+        /// <response code="404">la catégorie est introuvable</response>
+        /// <response code="500">Oops! le service est indisponible pour le moment</response>
         /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         // GET: api/Category/categories/{5}
+        [ProducesResponseType(typeof(Category), 200)]
+        [ProducesResponseType(typeof(NotFoundResult), 404)]
+        [ProducesResponseType(typeof(void), 500)]
         [HttpGet("categories/{id}")]
         public async Task<ActionResult<CategoryDto>> GetCatgoryByID(int id)
         {
@@ -74,7 +86,7 @@ namespace MiniStore.Controllers
             catch (Exception e)
             {
                 _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
-                return BadRequest(e);
+                return  new NotFoundResult();
             }
 
         }
@@ -87,8 +99,14 @@ namespace MiniStore.Controllers
         /// Ajouter une catégorie
         /// </summary>
         /// <returns>La catégorie ajoutée</returns>
+        /// <response code="201">Catégorie Ajoutée avec succès</response>
+        /// <response code="400">la catégorie est nulle</response>
+        /// <response code="500">Oops! le service est indisponible pour le moment</response>
         /// <exception>Déclanche une exception d'application si la catégorie est nulle ou l'un de ces champs null</exception>
         // POST: api/Category/add
+        [ProducesResponseType(typeof(CategoryDto), 201)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        [ProducesResponseType(typeof(void), 500)]
         [HttpPost("add")]
         public async Task<ActionResult<CategoryDto>> AddCategory([FromBody] CategoryDto categoryDto)
         {
@@ -106,7 +124,7 @@ namespace MiniStore.Controllers
             catch (Exception e)
             {
                 _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
-                return BadRequest(e.Message);
+                return BadRequest(e);
             }
 
         }
@@ -117,8 +135,14 @@ namespace MiniStore.Controllers
         /// Retourne le status de l'action de catégorie à supprimer
         /// </summary>
         /// <returns>boolean</returns>
+        /// <response code="202">Catégorie suprimmée avec succès</response>
+        /// <response code="400">la catégorie n'existe pas</response>
+        /// <response code="500">Oops! le service est indisponible pour le moment</response>
         /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         // GET: api/Category/categories/{5}
+        [ProducesResponseType(typeof(CategoryDto), 202)]
+        [ProducesResponseType(typeof(NotFoundResult), 400)]
+        [ProducesResponseType(typeof(void), 500)]
         [HttpDelete("categories/{id}")]
         public async Task<ActionResult<CategoryDto>> DeleteCategory(int id)
         {
@@ -147,8 +171,14 @@ namespace MiniStore.Controllers
         /// Retourne la catégorie synchronisée
         /// </summary>
         /// <returns>Category</returns>
+        /// <response code="204">Catégorie modifiée avec succès</response>
+        /// <response code="404">la catégorie n'existe pas</response>
+        /// <response code="500">Oops! le service est indisponible pour le moment</response>
         /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         // GET: api/Category/categories/{5}
+        [ProducesResponseType(typeof(CategoryDto), 204)]
+        [ProducesResponseType(typeof(NotFoundResult), 404)]
+        [ProducesResponseType(typeof(void), 500)]
         [HttpPut("categories/{id}")]
         public async Task<ActionResult<CategoryDto>> UpdateCategory(int id , [FromBody] CategoryDto categoryDto)
         {
@@ -163,7 +193,7 @@ namespace MiniStore.Controllers
             catch (Exception e)
             {
                 _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
-                return BadRequest(e);
+                return new NotFoundResult();
             }
 
         }

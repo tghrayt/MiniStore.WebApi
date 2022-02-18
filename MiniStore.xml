@@ -9,6 +9,9 @@
             Retourne toute la liste des categories
             </summary>
             <returns>La liste des categories</returns>
+            <response code="200">Liste des catégories</response>
+            <response code="404">la liste introuvable</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
             <exception>Déclanche une exception d'application si la liste est vide</exception>
         </member>
         <member name="M:MiniStore.Controllers.CategoryController.GetCatgoryByID(System.Int32)">
@@ -16,6 +19,9 @@
             Retourne une catégorie selon l'id donné
             </summary>
             <returns>La catégorie demandée</returns>
+            <response code="200">Catégorie sélectionné</response>
+            <response code="404">la catégorie est introuvable</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
             <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         </member>
         <member name="M:MiniStore.Controllers.CategoryController.AddCategory(MiniStore.Dto.CategoryDto)">
@@ -23,6 +29,9 @@
             Ajouter une catégorie
             </summary>
             <returns>La catégorie ajoutée</returns>
+            <response code="201">Catégorie Ajoutée avec succès</response>
+            <response code="400">la catégorie est nulle</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
             <exception>Déclanche une exception d'application si la catégorie est nulle ou l'un de ces champs null</exception>
         </member>
         <member name="M:MiniStore.Controllers.CategoryController.DeleteCategory(System.Int32)">
@@ -30,6 +39,9 @@
             Retourne le status de l'action de catégorie à supprimer
             </summary>
             <returns>boolean</returns>
+            <response code="202">Catégorie suprimmée avec succès</response>
+            <response code="400">la catégorie n'existe pas</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
             <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         </member>
         <member name="M:MiniStore.Controllers.CategoryController.UpdateCategory(System.Int32,MiniStore.Dto.CategoryDto)">
@@ -37,6 +49,9 @@
             Retourne la catégorie synchronisée
             </summary>
             <returns>Category</returns>
+            <response code="204">Catégorie modifiée avec succès</response>
+            <response code="400">la catégorie n'existe pas</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
             <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         </member>
     </members>
