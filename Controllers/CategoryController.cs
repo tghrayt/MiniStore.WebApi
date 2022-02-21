@@ -70,7 +70,7 @@ namespace MiniStore.Controllers
         /// <response code="500">Oops! le service est indisponible pour le moment</response>
         /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         // GET: api/Category/categories/{5}
-        [ProducesResponseType(typeof(Category), 200)]
+        [ProducesResponseType(typeof(CategoryDto), 200)]
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(void), 500)]
         [HttpGet("categories/{id}")]

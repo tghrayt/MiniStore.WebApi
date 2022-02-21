@@ -15,6 +15,10 @@ namespace MiniStore.Helper
             CreateMap<Category, CategoryDto>().ReverseMap();
 
             CreateMap<CategoryDto, Category>().ReverseMap();
+
+            CreateMap<Product, ProductDto>().ReverseMap();
+
+            CreateMap<ProductDto, Product>().ReverseMap();
         }
     }
 }

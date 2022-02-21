@@ -34,6 +34,9 @@ namespace MiniStore
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StoreConnStr")));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
+            
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(s =>
