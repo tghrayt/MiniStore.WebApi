@@ -83,7 +83,9 @@ namespace MiniStore.Controllers
                 var categorieDto = _mapper.Map<CategoryDto>(categorie);
                 if(categorieDto == null)
                 {
+                    _logger.LogWarning("la categorie n'existe pas!!");
                     return new NotFoundResult();
+                    
                 }
                 return StatusCode(200, categorieDto);
             }
@@ -119,6 +121,7 @@ namespace MiniStore.Controllers
                 _logger.LogInformation("Categorie/Add api Invoked (pour ajouter une nouvelle catégorie) ...");
                 if (!ModelState.IsValid)
                 {
+                    _logger.LogWarning("Enter a valid category name!!");
                     return BadRequest("Enter a valid category name");
                 }
                 var category = _mapper.Map<Category>(categoryDto);
@@ -156,6 +159,7 @@ namespace MiniStore.Controllers
                 var categorieStatus = await _categoryService.DeleteCategory(id);
                 if(categorieStatus == false)
                 {
+                    _logger.LogWarning("Cette categorie n'existe plus !!");
                     return BadRequest("Cette categorie n'existe plus !!");
                 }
                     return StatusCode(202, categorieStatus);

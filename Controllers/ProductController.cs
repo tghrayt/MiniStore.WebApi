@@ -88,6 +88,7 @@ namespace MiniStore.Controllers
                 var produitDto = _mapper.Map<ProductDto>(produit);
                 if(produitDto == null)
                 {
+                    _logger.LogWarning("Ce produit n'existe pas!!");
                     return new NotFoundResult();
                 }
                 return StatusCode(200, produitDto);
@@ -121,6 +122,7 @@ namespace MiniStore.Controllers
                 _logger.LogInformation("Products/Add api Invoked (pour ajouter un nouveau produit) ...");
                 if (!ModelState.IsValid)
                 {
+                    _logger.LogWarning("un des champs est null");
                     return BadRequest("un des champs est null");
                 }
                 var product = _mapper.Map<Product>(productDto);
@@ -159,6 +161,7 @@ namespace MiniStore.Controllers
                 var productStatus = await _productService.DeleteProduct(id);
                 if (productStatus == false)
                 {
+                    _logger.LogWarning("Ce produit n'existe plus !!");
                     return BadRequest("Ce produit n'existe plus !!");
                 }
                 return StatusCode(202, productStatus);

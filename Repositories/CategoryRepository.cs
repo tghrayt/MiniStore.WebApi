@@ -10,7 +10,7 @@ namespace MiniStore.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private StoreContext _storeContext;
+        private readonly StoreContext _storeContext;
 
         public CategoryRepository(StoreContext storeContext)
         {

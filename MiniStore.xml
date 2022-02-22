@@ -104,5 +104,15 @@
             <response code="500">Oops! le service est indisponible pour le moment</response>
             <exception>Déclanche une exception d'application si le produit n'existe pas</exception>
         </member>
+        <member name="M:MiniStore.Controllers.UserController.Register(MiniStore.Dto.UserForRegisterDto)">
+            <summary>
+            Retourne L'utilisateur enrégistré
+            </summary>
+            <returns>L'utilisateur enrégistré</returns>
+            <response code="201">L'utilisateur est enrégistré avec succès</response>
+            <response code="400">Cet utilisateur existe déja ou veillez saisir tous les champs</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si l'un des champs vide</exception>
+        </member>
     </members>
 </doc>

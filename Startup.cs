@@ -36,9 +36,12 @@ namespace MiniStore
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
             
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
+            services.AddCors();
             services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -65,7 +68,7 @@ namespace MiniStore
             {
                 // Production code ....!
             }
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseRouting();
 
             app.UseAuthorization();
