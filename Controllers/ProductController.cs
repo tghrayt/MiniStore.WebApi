@@ -86,6 +86,10 @@ namespace MiniStore.Controllers
                 _logger.LogInformation("products/id api Invoked (pour obtenir le produit demandée) ...");
                 var produit = await _productService.GetProductByID(id);
                 var produitDto = _mapper.Map<ProductDto>(produit);
+                if(produitDto == null)
+                {
+                    return new NotFoundResult();
+                }
                 return StatusCode(200, produitDto);
             }
             catch (Exception e)

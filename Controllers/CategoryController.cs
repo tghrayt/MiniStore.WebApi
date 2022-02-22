@@ -81,6 +81,10 @@ namespace MiniStore.Controllers
                 _logger.LogInformation("Categories/id api Invoked (pour obtenir la catégorie demandée) ...");
                 var categorie = await _categoryService.GetCatgoryByID(id);
                 var categorieDto = _mapper.Map<CategoryDto>(categorie);
+                if(categorieDto == null)
+                {
+                    return new NotFoundResult();
+                }
                 return StatusCode(200, categorieDto);
             }
             catch (Exception e)
