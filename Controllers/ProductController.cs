@@ -146,7 +146,7 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(ProductDto), 202)]
         [ProducesResponseType(typeof(NotFoundResult), 400)]
         [ProducesResponseType(typeof(void), 500)]
-        [HttpDelete("categories/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<ProductDto>> DeleteProduct(int id)
         {
             try
@@ -185,7 +185,7 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(ProductDto), 204)]
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(void), 500)]
-        [HttpPut("categories/{id}")]
+        [HttpPut("{id}")]
         public async Task<ActionResult<ProductDto>> UpdateCategory(int id, [FromBody] ProductDto productDto)
         {
             try

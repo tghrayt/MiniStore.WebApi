@@ -18,6 +18,7 @@ namespace MiniStore.Dto
         [Required]
         public DateTime Productmanufacturing { get; set; }
         [Required]
-        public Category category { get; set; }
+        public int Category_Prodcut_Id { get; set; }
+
     }
 }
