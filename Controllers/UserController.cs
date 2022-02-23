@@ -115,7 +115,7 @@ namespace MiniStore.Controllers
 
                 var userSelected = await _userService.Login(userForLoginDto.userName.ToLower(), userForLoginDto.password);
                 if (userSelected == null)
-                {
+                { 
                     return Unauthorized();
                 }
                 // Traitement JWT
