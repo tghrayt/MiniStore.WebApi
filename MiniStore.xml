@@ -114,5 +114,15 @@
             <response code="500">Oops! le service est indisponible pour le moment</response>
             <exception>Déclanche une exception d'application si l'un des champs vide</exception>
         </member>
+        <member name="M:MiniStore.Controllers.UserController.Login(MiniStore.Dto.UserForLoginDto)">
+            <summary>
+            Retourne le token d'utilisateur connecté
+            </summary>
+            <returns>Le token d'utilisateur connecté</returns>
+            <response code="200">Le token d'utilisateur connecté</response>
+            <response code="400">Cet utilisateur n'existe pas</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si l'utilisateur n'existe pas</exception>
+        </member>
     </members>
 </doc>
