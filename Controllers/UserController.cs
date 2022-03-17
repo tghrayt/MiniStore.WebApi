@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -18,6 +19,8 @@ namespace MiniStore.Controllers
 {
 
 
+
+    [EnableCors("AllowOrigin")]
     [ApiController]
     [Route("api/[controller]")]
     [Produces("application/json")]

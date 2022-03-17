@@ -37,7 +37,18 @@ namespace MiniStore
         {
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("StoreConnStr")));
             services.AddControllers();
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddPolicy(
+                    name: "AllowOrigin",
+                    builder =>
+                    {
+                        builder.WithOrigins("https://localhost:44351", "http://localhost:4200", "http://localhost:7183")
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod()
+                                            .AllowCredentials();
+                    });
+            });
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
@@ -89,11 +100,11 @@ namespace MiniStore
             }
             
 
+            
+            app.UseAuthentication();  
             app.UseRouting();
-            app.UseAuthentication();
+            app.UseCors("AllowOrigin");
             app.UseAuthorization();
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
