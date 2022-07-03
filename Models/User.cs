@@ -20,5 +20,8 @@ namespace MiniStore.Models
         public byte[] PasswordHash { get; set; }
 
         public byte[] PasswordSalt { get; set; }
+
+        [EmailAddress]
+        public string Email { get; set; }
     }
 }
