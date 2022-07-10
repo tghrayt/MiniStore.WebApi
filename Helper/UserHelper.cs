@@ -16,7 +16,6 @@ namespace MiniStore.Helper
             }
 
         }
-
         public static async Task<bool> VerfyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
